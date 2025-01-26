@@ -1,0 +1,166 @@
+$primary-color: #ff0059;
+$secondary-color: #f8f8f8;
+$border-radius: 8px;
+$text-color: #333;
+
+.dashboard-container {
+  font-family: Arial, sans-serif;
+  background-color: $secondary-color;
+  padding: 1rem;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    .user-info {
+      display: flex;
+      align-items: center;
+
+      .profile-picture {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-left: 1rem;
+      }
+
+      .user-name {
+        margin: 0;
+        font-size: 1.2rem;
+        color: $text-color;
+      }
+
+      .user-role {
+        margin: 0;
+        font-size: 0.9rem;
+        color: gray;
+      }
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+
+      input {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: $border-radius;
+        margin-left: 0.5rem;
+        width: 60rem;
+        margin-left: 50rem;
+      }
+
+      .search-btn {
+        background: $primary-color;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: $border-radius;
+        cursor: pointer;
+        margin-left: 1rem;
+
+        &:hover {
+          background: darken($primary-color, 10%);
+        }
+      }
+    }
+  }
+
+  .dashboard-main {
+    .actions {
+      margin-bottom: 1rem;
+
+      .btn-add-book {
+        background: $primary-color;
+        color: white;
+        padding: 0.8rem;
+        border: none;
+        border-radius: 30%;
+        cursor: pointer;
+        width: 6rem;
+        
+
+        &:hover {
+          background: darken($primary-color, 10%);
+        }
+      }
+    }
+
+    .book-management {
+      .section-title {
+        margin-bottom: 1rem;
+        margin-left: 105rem;
+        font-size: 1.5rem;
+        color: $text-color;
+      }
+
+      .book-table {
+        width: 100%;
+        border-collapse: collapse;
+
+        th,
+        td {
+          padding: 0.8rem;
+          text-align: center;
+          border-bottom: 1px solid #ddd;
+        }
+
+        th {
+          background: lighten($primary-color, 40%);
+          color: $text-color;
+        }
+
+        td {
+          background: white;
+        }
+      }
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1rem;
+
+      .pagination-btn {
+        background: $primary-color;
+        color: white;
+        border: none;
+        border-radius: $border-radius;
+        padding: 0.5rem 1rem;
+        margin: 0 0.5rem;
+        cursor: pointer;
+
+        &:hover {
+          background: darken($primary-color, 10%);
+        }
+      }
+
+      span {
+        font-size: 1rem;
+        color: $text-color;
+      }
+    }
+  }
+}
+// .btn-edit{
+//     background: $primary-color;
+//     color: white;
+//     padding: 0.8rem;
+//     border: none;
+//     border-radius: $border-radius;
+//     cursor: pointer;
+//     margin-right: 1rem;
+    
+// }
+// .btn-delete{
+//     background: $primary-color;
+//     color: white;
+//     padding: 0.8rem;
+//     border: none;
+//     border-radius: $border-radius;
+//     cursor: pointer;
+// }
