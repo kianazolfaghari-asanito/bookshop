@@ -1,0 +1,42 @@
+<div *ngIf="isLoading">Loading...</div>
+<div *ngIf="!isLoading && books.length > 0">
+  </div>
+<div class="dashboard-container">
+    <header class="dashboard-header">
+      <div class="search-bar">
+        <input type="text" placeholder="جستجو کالا" />
+        <button class="search-btn">🔍</button>
+      </div>
+    </header>
+  
+    <main class="dashboard-main">
+      <div class="actions">
+        <button class="btn-add-book" (click)="openDialog()">افزودن کتاب</button>
+      </div>
+  <hr>
+      <section class="book-management">
+        <h2 class="section-title">مدیریت کتاب‌ها</h2>
+        <table class="book-table">
+          <thead>
+            <tr>
+              <th>نام کتاب</th>
+              <th>موجودی</th>
+              <th>قیمت</th>
+              <th>شناسه کالا</th>
+              <th>عملیات</th>
+            </tr>
+          </thead>
+          
+          <tbody>
+            <tr *ngFor="let item of bookData.data">
+                <td>{{item.title}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.id}}</td>
+              </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+  
