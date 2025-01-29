@@ -109,6 +109,7 @@ export class ListComponent implements OnInit {
           text: 'اطلاعات ذخیره شد.',
           confirmButtonText: 'باشه'
         });
+        this.books.push(this.bookData)
         console.log('Response from server:', response);
       },
       error: (err) => {

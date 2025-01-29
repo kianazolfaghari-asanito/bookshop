@@ -20,13 +20,12 @@ export class LoginComponent {
     if (!this.userData.username || !this.userData.password) return;
 
     this.http
-      .post("http://localhost:3000/auth/login", this.userData)
+      .post<any>("http://localhost:3000/auth/login", this.userData)
       .subscribe(
         response => {
           console.log("login Successful:", response);
-          // if (this.userData.username === 'admin' && this.userData.password === 'password') {
-            this.router.navigate(['/list']);
-          // } 
+          localStorage.setItem("token", response.token);
+          this.router.navigate(["/list"]); 
         },
         error => {
           console.error("Registration Failed:", error);
