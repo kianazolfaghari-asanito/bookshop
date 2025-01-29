@@ -12,8 +12,9 @@
     <main class="dashboard-main">
       <div class="actions">
         <button class="btn-add-book" (click)="openDialog()">افزودن کتاب</button>
+        <button class="btn-logout" (click)="exit()">خروج</button>
       </div>
-  <hr>
+      <hr>
       <section class="book-management">
         <h2 class="section-title">مدیریت کتاب‌ها</h2>
         <table class="book-table">
@@ -29,10 +30,10 @@
           
           <tbody>
             <tr *ngFor="let item of books">
-                <td>{{item.title}}</td>
-                <td>{{item.quantity}}</td>
-                <td>{{item.price}}</td>
-                <td>{{item.id}}</td>
+                <td>{{item.title}} </td>
+                <td>{{item.quantity}} </td>
+                <td>{{item.price}} </td>
+                <td>{{item.id}} <button class="btn-delete" (click)=" deleteBook(item.id)">حذف</button> </td>
               </tr>
           </tbody>
         </table>

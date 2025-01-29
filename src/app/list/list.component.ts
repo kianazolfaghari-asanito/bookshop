@@ -1,15 +1,16 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, inject, model, OnInit, signal } from '@angular/core';
-import { Router } from '@angular/router';
-import Swal from 'sweetalert2'
+import { HttpClient } from "@angular/common/http";
+import { Component, inject, model, OnInit, signal } from "@angular/core";
+import { Router } from "@angular/router";
+import Swal from "sweetalert2";
+import { AuthSerivce } from "../authservice/auth.service";
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrl: './list.component.scss'
+  selector: "app-list",
+  templateUrl: "./list.component.html",
+  styleUrl: "./list.component.scss"
 })
 export class ListComponent implements OnInit {
-  books: any[] = []; 
+  books: any[] = [];
   isLoading: boolean = false;
   bookData = {
     totalBooks: 0,
@@ -23,14 +24,12 @@ export class ListComponent implements OnInit {
         summary: "",
         author: "",
         price: 0,
-        quantity: 0,
-      },
-    ],
+        quantity: 0
+      }
+    ]
   };
-  
 
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthSerivce) {}
 
   ngOnInit(): void {
     this.fetchBooks();
@@ -41,86 +40,129 @@ export class ListComponent implements OnInit {
     const queryParams = {
       page: 1,
       limit: 10,
-      title: '',
-      minPrice: 0,
+      title: "",
+      minPrice: 0
     };
 
-    this.http.get('http://localhost:3000/book', { params: queryParams }).subscribe(
-      (response: any) => {
-        this.books = response.data; 
-        this.isLoading = false;
-      },
-      (error: any) => {
-        console.error('Error fetching books:', error);
-        this.isLoading = false;
-      }
-    );
+    var token = localStorage.getItem("token");
+
+    this.http
+      .get("http://localhost:3000/book", {
+        params: queryParams,
+        headers: { Authorization: `Bearer ${token}` } // Adding Authorization header
+      })
+      .subscribe(
+        (response: any) => {
+          this.books = response.data;
+          this.isLoading = false;
+        },
+        (error: any) => {
+          console.error("Error fetching books:", error);
+          this.isLoading = false;
+        }
+      );
   }
-  
   async openDialog() {
     const { value: formValues } = await Swal.fire({
-      // title: `<h3 style="font-family: 'IranSans', sans-serif; font-size: 18px; font-weight: bold;">ایجاد محصول جدید</h3>`,
-    html: `
-      <div style="text-align: right; direction: rtl;">
-        <label>نام کتاب</label>
-        <input id="swal-input1" class="swal2-input" style="margin-top: 10px; margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; width: 95%;" placeholder="نام کتاب">
-        
-        <label>تعداد موجودی</label>
-        <input id="swal-input2" class="swal2-input" style="margin-top: 10px; margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; width: 95%;" placeholder="تعداد">
-        
-        <label>قیمت</label>
-        <input id="swal-input3" class="swal2-input" style="margin-top: 10px; margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; width: 95%;" placeholder="قیمت">
-        </div>
+      title: "ایجاد محصول جدید",
+      html: `
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+      <label style="font-size: 14px; font-weight: bold;">نام کتاب</label>
+      <input  type="text" id="swal-input1" style="height: 32px; font-size: 14px; border-radius: 8px; padding: 4px 8px; border: 1px solid #ddd;" placeholder="نام کتاب">
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+      <label style="font-size: 14px; font-weight: bold;">خلاصه</label>
+      <input  type="text" id="swal-input2" style="height: 32px; font-size: 14px; border-radius: 8px; padding: 4px 8px; border: 1px solid #ddd;" placeholder="خلاصه">
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+      <label style="font-size: 14px; font-weight: bold;">نویسنده</label>
+      <input  type="text" id="swal-input3" style="height: 32px; font-size: 14px; border-radius: 8px; padding: 4px 8px; border: 1px solid #ddd;" placeholder="نویسنده">
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+      <label style="font-size: 14px; font-weight: bold;">قیمت</label>
+      <input  type="number" id="swal-input4" style="height: 32px; font-size: 14px; border-radius: 8px; padding: 4px 8px; border: 1px solid #ddd;" placeholder="قیمت">
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+      <label style="font-size: 14px; font-weight: bold;">تعداد موجودی</label>
+      <input type="number" id="swal-input5" style="height: 32px; font-size: 14px; border-radius: 8px; padding: 4px 8px; border: 1px solid #ddd;" placeholder="تعداد موجودی">
+    </div>
+  </div>
       `,
       showCancelButton: true,
       confirmButtonText: "ایجاد",
       cancelButtonText: "انصراف",
-      confirmButtonColor: '#e63946',
-    cancelButtonColor: '#ccc',
       customClass: {
-        confirmButton: 'custom-confirm-button',
-        cancelButton: 'custom-cancel-button',
+        confirmButton: "custom-confirm-button",
+        cancelButton: "custom-cancel-button"
       },
       focusConfirm: false,
       preConfirm: () => {
         return {
-          title: (document.getElementById('swal-input1') as HTMLInputElement).value,
-          summary: (document.getElementById('swal-input2') as HTMLInputElement).value,
-          author: (document.getElementById('swal-input3') as HTMLInputElement).value,
-          price: Number((document.getElementById('swal-input4') as HTMLInputElement).value),
-          quantity: Number((document.getElementById('swal-input5') as HTMLInputElement).value),
+          title: (document.getElementById("swal-input1") as HTMLInputElement)
+            .value,
+          summary: (document.getElementById("swal-input2") as HTMLInputElement)
+            .value,
+          author: (document.getElementById("swal-input3") as HTMLInputElement)
+            .value,
+          price: Number(
+            (document.getElementById("swal-input4") as HTMLInputElement).value
+          ),
+          quantity: Number(
+            (document.getElementById("swal-input5") as HTMLInputElement).value
+          )
         };
       }
     });
-  
+
     if (formValues) {
       this.createBook(formValues);
     }
   }
 
   createBook(bookData: any) {
-    const url = 'http://localhost:3000/book';
-
-    this.http.post(url, bookData).subscribe({
-      next: (response) => {
-        Swal.fire({
-          icon: 'success',
-          title: 'کتاب با موفقیت ایجاد شد!',
-          text: 'اطلاعات ذخیره شد.',
-          confirmButtonText: 'باشه'
-        });
-        this.books.push(this.bookData)
-        console.log('Response from server:', response);
-      },
-      error: (err) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'ایجاد کتاب ناموفق بود!',
-          text: 'مشکلی رخ داده است. لطفاً دوباره تلاش کنید.',
-          confirmButtonText: 'باشه'
-        });
-        console.error('Error:', err);
-      }
+    const url = "http://localhost:3000/book";
+    let token = localStorage.getItem("token");
+    this.http
+      .post(url, bookData, {
+        headers: { Authorization: `Bearer ${token}` } 
+      })
+      .subscribe({
+        next: response => {
+          Swal.fire({
+            icon: "success",
+            title: "کتاب با موفقیت ایجاد شد",
+            text: "اطلاعات ذخیره شد.",
+            confirmButtonText: "باشه"
+          });
+          console.log("Response from server:", response);
+          this.books.push(this.bookData);
+        },
+        error: err => {
+          Swal.fire({
+            icon: "error",
+            title: "ایجاد کتاب ناموفق بود",
+            text: "مشکلی رخ داده است. لطفاً دوباره تلاش کنید.",
+            confirmButtonText: "باشه"
+          });
+          console.error("Error:", err);
+        }
+      });
+  }
+  exit() {
+    this.authService.logout();
+  }
+  apiUrl="http://localhost:3000/book"
+  deleteBook(id: string) {
+    this.http.delete(`${this.apiUrl}/${id}`).subscribe({
+      next: () => {
+        console.log(`Book ${id} deleted`);
+        this.books = this.books.filter(book => book.id !== id); 
+      },  
     });
   }
 }
