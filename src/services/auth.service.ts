@@ -16,7 +16,7 @@ export class AuthService {
     this.token = token;
     localStorage.setItem('token', token);
   }
-
+       
   removeToken() {
     this.token = null;
     localStorage.removeItem('token');
@@ -27,6 +27,8 @@ export class AuthService {
     this.removeToken();
     this.router.navigate(['/login']);
   }
+
+  test(){}
 }
 
 

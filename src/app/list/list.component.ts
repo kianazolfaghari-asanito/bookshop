@@ -94,7 +94,7 @@ export class ListComponent implements OnInit {
       confirmButtonText: 'ایجاد',
       cancelButtonText: 'انصراف',
       customClass: {
-        confirmButton: 'custom-confirm-button',
+        confirmButton: 'custom-confirm-button',      
         cancelButton: 'custom-cancel-button',
       },
       focusConfirm: false,
@@ -109,7 +109,7 @@ export class ListComponent implements OnInit {
       }
     });
 
-    if (formValues) {s
+    if (formValues.author) {
       this.createBook(formValues);
     }
   }
@@ -142,4 +142,5 @@ this.http.post(url, bookData).subscribe({
   }
 
 }
+
   
