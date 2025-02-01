@@ -3,6 +3,30 @@ import { Injectable, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @Injectable({ providedIn: "root" })
 export class AuthSerivce {
   user: any;
