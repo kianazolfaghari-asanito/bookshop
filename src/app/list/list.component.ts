@@ -109,7 +109,7 @@ export class ListComponent implements OnInit {
       }
     });
 
-    if (formValues) {
+    if (formValues) {s
       this.createBook(formValues);
     }
   }
