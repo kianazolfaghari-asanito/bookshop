@@ -11,7 +11,9 @@
   
     <main class="dashboard-main">
       <div class="actions">
-        <button class="btn-add-book">افزودن کتاب</button>
+        <button class="btn-add-book" (click)="openDialog()">افزودن کتاب</button>
+        <button class="btn-add-book" (click)="exit()">خروج</button>
+
       </div>
   <hr>
       <section class="book-management">
