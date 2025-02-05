@@ -3,7 +3,7 @@ import { AppComponent } from "./app.component";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { registerComponent } from "./register/register.component";
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from "./login/login.component";
 import { RouterModule,Routes } from "@angular/router";
 import { ListComponent } from "./list/list.component";
@@ -20,6 +20,7 @@ import {
 } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { AuthInterceptor } from "./authservice/AuthInterceptor.service";
 
 
 
@@ -42,7 +43,9 @@ const routes: Routes = [
     MatDialogActions,
     MatDialogClose,],
   exports: [RouterModule],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

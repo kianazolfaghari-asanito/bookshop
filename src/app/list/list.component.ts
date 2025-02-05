@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component, inject, model, OnInit, signal } from "@angular/core";
 import { Router } from "@angular/router";
 import Swal from "sweetalert2";
-import { AuthSerivce } from "../authservice/auth.service";
+import { AuthService } from "../authservice/auth.service";
 
 @Component({
   selector: "app-list",
@@ -29,7 +29,7 @@ export class ListComponent implements OnInit {
     ]
   };
 
-  constructor(private http: HttpClient, private authService: AuthSerivce) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.fetchBooks();
@@ -40,27 +40,19 @@ export class ListComponent implements OnInit {
     const queryParams = {
       page: 1,
       limit: 10,
-      title: "",
+      title: '',
       minPrice: 0
     };
 
-    var token = localStorage.getItem("token");
-
-    this.http
-      .get("http://localhost:3000/book", {
-        params: queryParams,
-        headers: { Authorization: `Bearer ${token}` } // Adding Authorization header
-      })
-      .subscribe(
-        (response: any) => {
-          this.books = response.data;
-          this.isLoading = false;
-        },
-        (error: any) => {
-          console.error("Error fetching books:", error);
-          this.isLoading = false;
-        }
-      );
+    this.http.get('http://localhost:3000/book', { params: queryParams }).subscribe(
+      (response: any) => {
+        this.books = response.data;
+        this.isLoading = false;
+      },
+      (error: any) => {
+        this.isLoading = false;
+      }
+    );
   }
   async openDialog() {
     const { value: formValues } = await Swal.fire({

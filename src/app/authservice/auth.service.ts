@@ -1,48 +1,22 @@
-import { HttpEvent, HttpHandler, HttpRequest } from "@angular/common/http";
-import { Injectable, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@Injectable({ providedIn: "root" })
-export class AuthSerivce {
+@Injectable({ providedIn: 'root' })
+export class AuthService {
   user: any;
-  token: string;
-  static logout: any;
+  token: string | null;
 
   constructor(private router: Router) {
-    this.token = localStorage.getItem("token");
-    if (!this.token) this.router.navigate(["/login"]);
+    this.token = localStorage.getItem('token');
+    if (!this.token) this.router.navigate(['/login']);
   }
 
-  private setToken(token: string) {
+  setToken(token: string) {
     this.token = token;
-    localStorage.setItem("token", token);
+    localStorage.setItem('token', token);
   }
-  private removeToken() {
+
+  removeToken() {
     this.token = null;
     localStorage.removeItem('token');
   }
@@ -50,21 +24,6 @@ export class AuthSerivce {
   logout() {
     this.user = null;
     this.removeToken();
-    if (!this.token) this.router.navigate(["/login"]);
+    this.router.navigate(['/login']);
   }
-  intercept(
-      request: HttpRequest<any>,
-      next: HttpHandler
-    ): Observable<HttpEvent<any>> {
-      if (this.token) {
-  
-        request = request.clone({
-          setHeaders: {
-            Authorization: `Bearer ${this.token}`
-          }
-        });
-  
-      }
-      return next.handle(request);
-    }
 }
