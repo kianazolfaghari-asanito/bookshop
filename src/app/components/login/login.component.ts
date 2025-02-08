@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
+import { PostService } from '../../services/httpServices/post.service';
 
 @Component({
   selector: 'app-login',
@@ -14,22 +15,9 @@ export class LoginComponent {
   };
   errorMessage: string = 'username or password is incorrect';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private postService : PostService) {}
 
-  login() {
-    if (!this.userData.username || !this.userData.password) return;
-
-    this.http
-      .post<any>("http://localhost:3000/auth/login", this.userData)
-      .subscribe(
-        response => {
-          console.log("login Successful:", response);
-          localStorage.setItem("token", response.token);
-          this.router.navigate(["/list"]); 
-        },
-        error => {
-          console.error("Registration Failed:", error);
-        }
-      );
+  loginUser() {
+    this.
   }
 }
