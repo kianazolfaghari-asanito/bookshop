@@ -13,12 +13,13 @@ export class registerComponent {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private PostService: PostService,
+    private PostService: PostService
   ) {}
-  registerUser(body:userData) {
+  registerUser(body: userData) {
     this.PostService.register(body).subscribe(Response => {
-      console.log("register sucsess");
+      if (Response) {
+        this.router.navigate(["/login"]);
+      }
     });
-    this.router.navigate(["/login"]);
   }
 }

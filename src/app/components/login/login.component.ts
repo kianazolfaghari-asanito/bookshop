@@ -11,10 +11,11 @@ import { userData } from '../../services/dataTypes/userdata.service';
 })
 export class LoginComponent {
   errorMessage: string = 'username or password is incorrect';
+  data: userData
 
   constructor(private http: HttpClient, private router: Router, private postService : PostService) {}
 
-  loginUser(body: userData) {
+  loginUser(body: userData):void {
     this.postService.login(body).subscribe ((Response =>{
       console.log ('login sucsess')
     }))
