@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { PostService } from "../../services/httpServices/post.service";
+import { userData } from "../../services/dataTypes/userdata.service";
 
 @Component({
   selector: "app-register",
@@ -9,11 +10,15 @@ import { PostService } from "../../services/httpServices/post.service";
   styleUrl: "./register.component.scss"
 })
 export class registerComponent {
-  constructor(private http: HttpClient, private router: Router, private PostService:PostService) {}
-  body: { username: string; password: string }
-  registerUser() {
-    this.PostService.register(this.body);
-    this.router.navigate(['/login']);
-
-    }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private PostService: PostService,
+  ) {}
+  registerUser(body:userData) {
+    this.PostService.register(body).subscribe(Response => {
+      console.log("register sucsess");
+    });
+    this.router.navigate(["/login"]);
   }
+}
