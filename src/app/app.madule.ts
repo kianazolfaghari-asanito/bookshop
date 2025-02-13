@@ -11,12 +11,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthInterceptor } from './authservice/AuthInterceptor.service';
 import { LibraryService } from './services/library.service';
-
+import { authGuard } from './guard/auth.guard';
+import { PostService } from './services/httpServices/post.service';
 const routes: Routes = [
   { path: 'register', component: registerComponent },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'list', component: ListComponent },
+  { path: 'list', component: ListComponent, 
+    canActivate:[authGuard]
+  },
 ];
 
 @NgModule({

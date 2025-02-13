@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component } from "@angular/core";
-import { registerComponent } from "./register/register.component";
 
 @Component({
   selector: "app-root",

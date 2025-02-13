@@ -2,8 +2,8 @@
     <h1 class="title">ورود به سایت</h1>
     <div class="login-card">
       <h2 class="login-title">ورود</h2>
-      <form class="login-form" (ngSubmit)="login()">
-        <input type="text" placeholder="نام کاربری" class="input-field" [(ngModel)]="userData.username" [ngModelOptions]="{standalone: true}">
+      <form class="login-form" (ngSubmit)="loginUser()">
+        <input type="text" placeholder="نام کاربری" class="input-field" [(ngModel)]="userData.userName" [ngModelOptions]="{standalone: true}">
         <input type="password" placeholder="رمز عبور" class="input-field" [(ngModel)]="userData.password" [ngModelOptions]="{standalone: true}">
         <button type="submit" class="btn-login">ورود</button>
       </form>

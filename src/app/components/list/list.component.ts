@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 import { AuthService } from '../../authservice/auth.service';
 import { LibraryService } from '../../services/library.service';
 import { HttpService } from '../../services/httpServices/get.service';
+import { PostService } from '../../services/httpServices/post.service';
+import { bookData } from '../../services/dataTypes/bookdata.service';
 
 @Component({
   selector: 'app-list',
@@ -31,11 +33,13 @@ export class ListComponent implements OnInit {
     ],
   };
 
+
   constructor(
     private http: HttpClient,
     private authService: AuthService,
     private library: LibraryService,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private postService:PostService
   ) {}
 
   ngOnInit(): void {
@@ -67,35 +71,6 @@ export class ListComponent implements OnInit {
     this.library.openDialog();
   }
 
-  createBook(bookData: any) {
-    const url = 'http://localhost:3000/book';
-    let token = localStorage.getItem('token');
-    this.http
-      .post(url, bookData, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .subscribe({
-        next: (response) => {
-          Swal.fire({
-            icon: 'success',
-            title: 'کتاب با موفقیت ایجاد شد',
-            text: 'اطلاعات ذخیره شد.',
-            confirmButtonText: 'باشه',
-          });
-          console.log('Response from server:', response);
-          this.books.push(this.bookData);
-        },
-        error: (err) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'ایجاد کتاب ناموفق بود',
-            text: 'مشکلی رخ داده است. لطفاً دوباره تلاش کنید.',
-            confirmButtonText: 'باشه',
-          });
-          console.error('Error:', err);
-        },
-      });
-  }
   exit() {
     this.authService.logout();
   }

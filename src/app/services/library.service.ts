@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
+import { PostService } from './httpServices/post.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LibraryService {
-
-  constructor() { }
+  constructor(private postService: PostService) {}
   async openDialog() {
     const { value: formValues } = await Swal.fire({
-      title: "ایجاد محصول جدید",
+      title: 'ایجاد محصول جدید',
       html: `
         <div style="display: flex; flex-direction: column; gap: 1rem;">
     <div style="display: flex; flex-direction: column; gap: 4px;">
@@ -39,29 +39,32 @@ export class LibraryService {
   </div>
       `,
       showCancelButton: true,
-      confirmButtonText: "ایجاد",
-      cancelButtonText: "انصراف",
+      confirmButtonText: 'ایجاد',
+      cancelButtonText: 'انصراف',
       customClass: {
-        confirmButton: "custom-confirm-button",
-        cancelButton: "custom-cancel-button"
+        confirmButton: 'custom-confirm-button',
+        cancelButton: 'custom-cancel-button',
       },
       focusConfirm: false,
       preConfirm: () => {
         return {
-          title: (document.getElementById("swal-input1") as HTMLInputElement)
+          title: (document.getElementById('swal-input1') as HTMLInputElement)
             .value,
-          summary: (document.getElementById("swal-input2") as HTMLInputElement)
+          summary: (document.getElementById('swal-input2') as HTMLInputElement)
             .value,
-          author: (document.getElementById("swal-input3") as HTMLInputElement)
+          author: (document.getElementById('swal-input3') as HTMLInputElement)
             .value,
           price: Number(
-            (document.getElementById("swal-input4") as HTMLInputElement).value
+            (document.getElementById('swal-input4') as HTMLInputElement).value
           ),
           quantity: Number(
-            (document.getElementById("swal-input5") as HTMLInputElement).value
-          )
+            (document.getElementById('swal-input5') as HTMLInputElement).value
+          ),
         };
-      }
+      },
     });
+    if (formValues) {
+      this.postService.addBooks(formValues);
+    }
   }
 }
