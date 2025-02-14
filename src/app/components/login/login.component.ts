@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostService } from '../../services/httpServices/post.service';
 import { userData } from '../../services/dataTypes/userdata.service';
+import { AuthService } from '../../authservice/auth.service';
+import { AuthInterceptor } from '../../authservice/AuthInterceptor.service';
 
 @Component({
   selector: 'app-login',

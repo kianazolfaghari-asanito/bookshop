@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, inject, model, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -7,6 +7,7 @@ import { LibraryService } from '../../services/library.service';
 import { HttpService } from '../../services/httpServices/get.service';
 import { PostService } from '../../services/httpServices/post.service';
 import { bookData } from '../../services/dataTypes/bookdata.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-list',
@@ -48,23 +49,20 @@ export class ListComponent implements OnInit {
 
   fetchBooks(): void {
     this.isLoading = true;
-    const queryParams = {
-      page: 1,
-      limit: 10,
-      title: '',
-      minPrice: 0,
-    };
+    let params=new HttpParams();
+    params= params.append("page",1).append("limit", 10)
 
     this.http
-      .get('http://localhost:3000/book', { params: queryParams })
-      .subscribe(
+      .get('http://localhost:3000/book', { params })
+      .subscribe({next:
         (response: any) => {
           this.books = response.data;
           this.isLoading = false;
         },
-        (error: any) => {
+        error:(error: any) => {
           this.isLoading = false;
         }
+      }
       );
   }
   openDialog() {
