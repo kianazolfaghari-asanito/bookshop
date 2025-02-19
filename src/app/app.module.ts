@@ -13,6 +13,8 @@ import { AuthInterceptor } from './authservice/AuthInterceptor.service';
 import { LibraryService } from './services/library.service';
 // import { authGuard } from './guard/auth.guard';
 import { PostService } from './services/httpServices/post.service';
+import { HeaderComponent } from "./components/header/header.component";
+
 const routes: Routes = [
   { path: 'register', component: registerComponent },
   { path: 'login', component: LoginComponent },
@@ -37,7 +39,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MatInputModule,
     FormsModule,
-  ],
+    HeaderComponent
+],
   exports: [RouterModule],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

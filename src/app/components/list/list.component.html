@@ -1,11 +1,11 @@
-<div *ngIf="isLoading">Loading...</div>
-<div *ngIf="!isLoading && books.length > 0">
-  </div>
+<!-- <div *ngIf="isLoading">Loading...</div>
+<div *ngIf="!isLoading && books.length > 0"> -->
+  <!-- </div> -->
 <div class="dashboard-container">
     <header class="dashboard-header">
       <div class="search-bar">
         <input type="text" placeholder="جستجو کالا" />
-        <button class="search-btn">🔍</button>
+        <button class="search-btn" [(ngModel)]="id"   (click)="searchById()">🔍</button>
       </div>
     </header>
   
@@ -33,7 +33,7 @@
                 <td>{{item.title}} </td>
                 <td>{{item.quantity}} </td>
                 <td>{{item.price}} </td>
-                <td>{{item.id}} <button class="btn-delete" (click)=" deleteBook(item.id)">حذف</button> </td>
+                <td>{{item.id}} <button class="btn-delete">حذف</button> </td>
               </tr>
           </tbody>
         </table>

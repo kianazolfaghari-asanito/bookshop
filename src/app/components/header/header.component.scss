@@ -1,0 +1,29 @@
+nav {
+    background-color: #ffccde;
+    border-radius: 40px;
+    padding: 2px 32px;
+    width: 100%;
+    ul {
+      list-style: none;
+      display: flex;
+      justify-self: end;
+      gap: 35px;
+    }
+    a {
+      color: rgb(0, 0, 0);
+      text-decoration: none;
+      cursor: pointer;
+      
+    }
+  }
+   a:hover {
+    text-decoration: underline;
+    background-color: rgb(255, 226, 246,0.5);
+    padding: 2px auto;
+    border-radius: 10px;
+    display: block;
+   }
+
+   .test {
+    display: flex;
+   }
