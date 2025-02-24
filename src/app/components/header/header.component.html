@@ -1,13 +1,17 @@
-<div class="test">
-<nav>
-    <ul>
-        <li><a routerLink="/">لینک 1</a></li>
-        <li><a routerLink="/">لینک 2</a></li>
-        <li><a routerLink="/">لینک 3</a></li>
-        <li><a routerLink="/">لینک 4</a></li>
-        <li><a routerLink="/">محصولات</a></li>
-        <li><a routerLink="/list">لیست کتاب‌ها</a></li>
-    </ul>
-</nav>
+<div  [ngSwitch]="navType" class="test">
+    <nav *ngSwitchCase="'defult'">
+        <div class="username">
+            <p>{{customerName}}</p>
+        </div>
+        <div >
+            <ul>
+                <li><a routerLink="/aboutus">درباره ما</a></li>
+                <li><a routerLink="/invoices">فاکتور ها</a></li>
+                <li><a routerLink="/myshops">خریدهای من</a></li>
+                <li><a routerLink="/cartabl">کارتابل</a></li>
+                <li><a routerLink="/products">محصولات</a></li>
+                <li><a routerLink="/list">لیست کتاب‌ها</a></li>
+            </ul>
+        </div>
+    </nav>
 </div>
-

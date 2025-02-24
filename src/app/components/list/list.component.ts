@@ -15,7 +15,8 @@ import { GetService, search } from "../../services/httpServices/get.service";
   styleUrl: "./list.component.scss"
 })
 export class ListComponent implements OnInit {
-  data: bookData[] = [];
+  data: bookData[] | undefined;
+  loader: any;
 
   constructor(
     private http: HttpClient,
@@ -25,11 +26,14 @@ export class ListComponent implements OnInit {
     private postService: PostService
   ) {}
   // loader = this.getService.isloading;
-  id :search;
+  id: search;
 
   ngOnInit(): void {
     this.getService.fetchBooks();
     this.data = this.getService.data;
+    let showLoader = this.getService.isloading.next(false);
+    this.loader = showLoader;
+    console.log(this.data);
   }
   openDialog() {
     this.library.openDialog();

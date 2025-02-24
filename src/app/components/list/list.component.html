@@ -1,43 +1,42 @@
-<!-- <div *ngIf="isLoading">Loading...</div>
-<div *ngIf="!isLoading && books.length > 0"> -->
-  <!-- </div> -->
+<div *ngIf="loader">Loading...</div>
+<div *ngIf="!loader && data.length > 0"> رکوردی یافت نشد</div>
+
 <div class="dashboard-container">
-    <header class="dashboard-header">
-      <div class="search-bar">
-        <input type="text" placeholder="جستجو کالا" />
-        <button class="search-btn" [(ngModel)]="id"   (click)="searchById()">🔍</button>
-      </div>
-    </header>
-  
-    <main class="dashboard-main">
-      <div class="actions">
-        <button class="btn-add-book" (click)="openDialog()">افزودن کتاب</button>
-        <button class="btn-logout" (click)="exit()">خروج</button>
-      </div>
-      <hr>
-      <section class="book-management">
-        <h2 class="section-title">مدیریت کتاب‌ها</h2>
-        <table class="book-table">
-          <thead>
-            <tr>
-              <th>نام کتاب</th>
-              <th>موجودی</th>
-              <th>قیمت</th>
-              <th>شناسه کالا</th>
-              <th>عملیات</th>
-            </tr>
-          </thead>
-          
-          <tbody>
-            <tr *ngFor="let item of data">
-                <td>{{item.title}} </td>
-                <td>{{item.quantity}} </td>
-                <td>{{item.price}} </td>
-                <td>{{item.id}} <button class="btn-delete">حذف</button> </td>
-              </tr>
-          </tbody>
-        </table>
-      </section>
-    </main>
-  </div>
-  
+  <header class="dashboard-header">
+    <div class="search-bar">
+      <input type="text" placeholder="جستجو کالا" />
+      <button class="search-btn" [(ngModel)]="id" (click)="searchById()">🔍</button>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <div class="actions">
+      <button class="btn-add-book" (click)="openDialog()">افزودن کتاب</button>
+      <button class="btn-logout" (click)="exit()">خروج</button>
+    </div>
+    <hr>
+    <section class="book-management">
+      <h2 class="section-title">مدیریت کتاب‌ها</h2>
+      <table class="book-table">
+        <thead>
+          <tr>
+            <th>نام کتاب</th>
+            <th>موجودی</th>
+            <th>قیمت</th>
+            <th>شناسه کالا</th>
+            <th>عملیات</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of data">
+            <td>{{item.title}} </td>
+            <td>{{item.quantity}} </td>
+            <td>{{item.price}} </td>
+            <td>{{item.id}} <button class="btn-delete">حذف</button> </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</div>
