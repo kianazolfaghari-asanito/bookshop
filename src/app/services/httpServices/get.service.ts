@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { ChangeDetectorRef, Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { BehaviorSubject } from "rxjs";
 import { bookData } from "../dataTypes/bookdata.service";
@@ -25,11 +25,11 @@ export class GetService {
       maxPrice: 0
     };
     this.http
-      .get<bookData[]>(`${this.baseUrl}/book`, { params: queryParams })
+      .get<any>(`${this.baseUrl}/book`, { params: queryParams })
       .subscribe({
         next: (response: any) => {
           this.isloading.next(false);
-          this.data.push(response);
+          this.data.push(...response.data);
         },
         error: (error: any) => {
           this.isloading.next(false);
@@ -42,11 +42,11 @@ export class GetService {
     
    
     if (id) {
-      params = params.set('id', id);
+      params = params.append('id', id);
     }
   
     this.http
-      .get(`${this.baseUrl}/book`, { params }) 
+      .get(`${this.baseUrl}/book`, { params:{id} }) 
       .subscribe({
         next: (response) => console.log(response),
         error: (err) => console.error('Error:', err), 

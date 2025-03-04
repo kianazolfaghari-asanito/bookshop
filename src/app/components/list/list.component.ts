@@ -15,25 +15,22 @@ import { GetService, search } from "../../services/httpServices/get.service";
   styleUrl: "./list.component.scss"
 })
 export class ListComponent implements OnInit {
-  data: bookData[] | undefined;
+  data: bookData[] | undefined = [];
   loader: any;
 
   constructor(
     private http: HttpClient,
     private authService: AuthService,
     private library: LibraryService,
-    private getService: GetService,
+    public getService: GetService,
     private postService: PostService
   ) {}
-  // loader = this.getService.isloading;
-  id: search;
+  id: string;
 
   ngOnInit(): void {
     this.getService.fetchBooks();
     this.data = this.getService.data;
-    let showLoader = this.getService.isloading.next(false);
-    this.loader = showLoader;
-    console.log(this.data);
+    this.loader = this.getService.isloading;
   }
   openDialog() {
     this.library.openDialog();
@@ -43,7 +40,7 @@ export class ListComponent implements OnInit {
     this.authService.logout();
   }
   searchById() {
-    this.getService.searchBooks();
+    this.getService.searchBooks(this.id);
   }
   // apiUrl = "http://localhost:3000/book";
   // deleteBook(id: string) {
