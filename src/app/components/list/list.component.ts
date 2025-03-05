@@ -17,6 +17,7 @@ import { GetService, search } from "../../services/httpServices/get.service";
 export class ListComponent implements OnInit {
   data: bookData[] | undefined = [];
   loader: any;
+  id: string;
 
   constructor(
     private http: HttpClient,
@@ -25,7 +26,6 @@ export class ListComponent implements OnInit {
     public getService: GetService,
     private postService: PostService
   ) {}
-  id: string;
 
   ngOnInit(): void {
     this.getService.fetchBooks();

@@ -1,13 +1,12 @@
 <div class="login-container">
-  <h1 class="title">ورود به سایت</h1>
+  <h1 class="title">ورود به فروشگاه</h1>
   <div class="login-card">
+    <img  class="lodin-img" src="assets/images/book1.PNG" alt="books">
     <div class="login-space">
       <h2 class="login-title">ورود</h2>
       <form class="login-form" (ngSubmit)="loginUser()">
-        <label class="label"    for="#">نام کاربری</label>
         <input type="text" placeholder="نام کاربری" class="input-field" [(ngModel)]="userData.userName"
           [ngModelOptions]="{standalone: true}">
-          <label for="#">رمزعبور</label>
         <input type="password" placeholder="رمز عبور" class="input-field" [(ngModel)]="userData.password"
           [ngModelOptions]="{standalone: true}">
         <button type="submit" class="btn-login">ورود</button>

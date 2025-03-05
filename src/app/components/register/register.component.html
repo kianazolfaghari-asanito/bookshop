@@ -1,11 +1,14 @@
 <div class="login-container">
-    <h1 class="title"> ایجاد حساب کاربری</h1>
+    <h1 class="title"> خوش آمدید</h1>
     <div class="login-card">
+      <div class="login-space">
       <h2 class="login-title">ثبت اطلاعات</h2>
       <form class="login-form" (ngSubmit)="registerUser()">
         <input type="text" placeholder="نام کاربری" class="input-field" [(ngModel)]="userData.userName" [ngModelOptions]="{standalone: true}">
         <input type="password" placeholder="رمز عبور" class="input-field" [(ngModel)]="userData.password" [ngModelOptions]="{standalone: true}">
         <button type="submit" class="btn-login">ثبت نام</button>
-      </form>  
+      </form> 
+      <p class="create-account"><a routerLink="/login" class="create-account-link">ورود</a>حساب کاربری دارید؟</p>
+    </div> 
     </div>
   </div>

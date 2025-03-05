@@ -25,6 +25,7 @@ import { InvocesComponent } from "./components/invoces/invoces.component";
 import { AboutusComponent } from "./components/aboutus/aboutus.component";
 import { CartablComponent } from "./components/cartabl/cartabl.component";
 import { MyshopsComponent } from "./components/myshops/myshops.component";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const routes: Routes = [
   { path: "register", component: registerComponent },
@@ -66,7 +67,8 @@ const routes: Routes = [
     CommonModule,
     NgSwitch,
     NgSwitchCase,
-    NgSwitchDefault
+    NgSwitchDefault,
+    FontAwesomeModule
   ],
   exports: [RouterModule],
   providers: [

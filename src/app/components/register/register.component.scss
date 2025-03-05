@@ -1,6 +1,6 @@
 
-$primary-color: #ff0059;
-$background-color: #f8f8f8;
+$primary-color: #357de7;
+$background-color: #357de7;
 $text-color: #333;
 $border-radius: 12px;
 
@@ -17,10 +17,10 @@ $border-radius: 12px;
   text-align: center;
 
   .title {
-    font-size: 1.5rem;
-    color: $text-color;
+    font-size: 2rem;
+    color: white;
     margin-bottom: 2rem;
-    margin-left: 3rem;
+    margin-left: 10px;
   }
 
   .login-card {
@@ -28,41 +28,85 @@ $border-radius: 12px;
     padding: 2rem;
     border-radius: $border-radius;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 450px;
+    width: 900px;
+    height: 650px;
 
-    .login-title {
-      font-size: 1.2rem;
-      color: $text-color;
-      margin-bottom: 1.5rem;
+    .login-space {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      height: 100%;
+      padding-right: 2rem; 
     }
 
+    .login-title {
+      margin-right: 113px;
+    }
+    
     .login-form {
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      width: 100%;
+      text-align: right; 
 
+      .label{
+        margin-bottom: 0px;
+      }
+    
       .input-field {
         padding: 0.8rem;
         border: 1px solid #ddd;
         border-radius: $border-radius;
         font-size: 0.9rem;
+        width: 300px; 
+        margin-left: auto; 
+        margin-right: 0;
       }
-
+    
       .btn-login {
         padding: 0.8rem;
-        background-color: $primary-color;
+        background-color: $background-color;
         color: #fff;
         border: none;
         border-radius: $border-radius;
         font-size: 1rem;
         cursor: pointer;
         transition: background 0.3s;
-
+        width: 328px;
+        margin-left: auto;
+        margin-right: 0;
+    
         &:hover {
           background-color: darken($primary-color, 10%);
         }
       }
     }
+
+    .create-account-link {
+      margin-top: 1rem;
+      display: inline-block;
+      color: $primary-color;
+      text-decoration: none;
+      font-size: 0.9rem;
+
+      .create-account{
+        margin-top: 1rem;
+        display: inline-block;
+        color: $text-color;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
+}
+.lodin-img{
+  margin-right: 415px;
+  margin-top: 300px;
+  position: absolute;
 }
